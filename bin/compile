@@ -62,7 +62,7 @@ mv /app/vendor/* $BUILD_DIR/vendor/
 
 
 echo -e "-----> Preparing Composer"
-# composer_package
+composer_package
 
 
 
