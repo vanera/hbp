@@ -1,0 +1,29 @@
+#!/bin/sh
+DEFAULT_CONF=/app/conf/nginx.conf
+DEFAULT_ROOT=/app/vendor/nginx
+
+export POSTGRESQL_URL="postgres://kidxlcmjelupro:BIppLpyT2_5E2FsaDpbxv-X-Kv@ec2-54-221-236-4.compute-1.amazonaws.com:5432/d3tejf3n4ju9lc"
+export LD_LIBRARY_PATH="/app/app/lib/"
+
+CONF="${1:-$DEFAULT_CONF}"
+ROOT="${2:-$DEFAULT_ROOT}"
+APPCONF=/app/conf/app.nginx
+
+NGINX=$DEFAULT_ROOT/sbin/nginx
+LUA=/app/vendor/lua/bin/lua
+
+OUT_CONF="$CONF.compiled"
+# tail -f -n 0 logs/error.log &
+
+
+cd "$ROOT"
+
+echo -e "bin/run ---> Compiling NGINX Configuration: "
+
+cat "$CONF" | $LUA /app/lib/ngx_compiler.lua > "$OUT_CONF"
+cat "$APPCONF" | $LUA /app/lib/ngx_compiler.lua > "$APPCONF.compiled"
+mkdir -p logs
+
+$NGINX -p "$(pwd)" -c "$OUT_CONF"
+
+

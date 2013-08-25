@@ -1,0 +1,79 @@
+#!/bin/bash
+
+set -e
+shopt -s dotglob
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+function mktmpdir() {
+    dir=$(mktemp -t php-$1-XXXX)
+    rm -rf $dir
+    mkdir -p $dir
+    echo $dir
+}
+
+BUILD_DIR="$1"
+CACHE_DIR="$2"
+ROCK_DIR="$DIR/.."
+
+# Include package bundle installers
+source  $ROCK_DIR/packages/bundle.package.sh
+source  $ROCK_DIR/packages/composer.package.sh
+source  $ROCK_DIR/packages/nginx.package.sh
+source  $ROCK_DIR/packages/lua.package.sh
+source  $ROCK_DIR/packages/php.package.sh
+
+
+echo -e "-----> Preparing Base APP"
+
+mkdir -p /app/vendor
+mkdir -p $BUILD_DIR/app
+mkdir -p $BUILD_DIR/bin
+mkdir -p $BUILD_DIR/lib
+mkdir -p $BUILD_DIR/logs
+mkdir -p $BUILD_DIR/vendor
+
+cp    $ROCK_DIR/bin/composer          $BUILD_DIR/bin
+cp    $ROCK_DIR/bin/run               $BUILD_DIR/bin
+cp -R $ROCK_DIR/lib/ngx_compiler.lua  $BUILD_DIR/lib/
+cp -R $ROCK_DIR/support               $BUILD_DIR/
+cp -R $ROCK_DIR/conf                  $BUILD_DIR/
+# cp -R $ROCK_DIR/vendor/php            /app/vendor
+
+
+bundle_package # Install the binary bundle
+# php_package # build out custom php bundle
+
+# don't need to manually compile nginx
+# nginx_package 
+
+echo -e "-----> Preparing Lua"
+# lua_package
+
+
+
+echo -e "-----> Vendoring Libaries"
+
+mv /app/vendor/* $BUILD_DIR/vendor/
+
+
+echo -e "-----> Preparing Composer"
+# composer_package
+
+
+
+
+echo -e "-----> /app Contents"
+echo -e ""
+ls -l ${BUILD_DIR}/
+
+echo -e "<-----"
+echo -e ""
+
+
+cd "$BUILD_DIR"
+

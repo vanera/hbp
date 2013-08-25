@@ -1,0 +1,4 @@
+app/bin/autodeploy.sh
+bin/autodeploy.sh
+3rdparty/vulcan
+dump/*
