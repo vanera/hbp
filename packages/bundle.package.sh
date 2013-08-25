@@ -7,13 +7,15 @@ function bundle_package(){
     
     mkdir -p /app/vendor
     mkdir -p /app/vendor/php
-    
+
+    7z=/app/vendor/p7zip/bin/7z
+    ex="e"
     # package.tar.gz contains lua, lua-jit and nginx and friends
-    tar -xzf $ROCK_DIR/packages/dist/php.tar.gz  -C /app/vendor/
-    tar -xzf $ROCK_DIR/packages/dist/lua.tar.gz  -C /app/vendor/
-    tar -xzf $ROCK_DIR/packages/dist/luajit.tar.gz  -C /app/vendor/
-    tar -xzf $ROCK_DIR/packages/dist/lualib.tar.gz  -C /app/vendor/
-    tar -xzf $ROCK_DIR/packages/dist/nginx.tar.gz  -C /app/vendor/
+    $7z e $ROCK_DIR/packages/dist/php.7z
+    $7z e $ROCK_DIR/packages/dist/lua.7z
+    $7z e $ROCK_DIR/packages/dist/luajit.7z
+    $7z e $ROCK_DIR/packages/dist/lualib.7z
+    $7z e $ROCK_DIR/packages/dist/nginx.7z
 
     echo -e "Finished installing the binary bundle" | indent
 }

@@ -26,6 +26,7 @@ source  $ROCK_DIR/packages/composer.package.sh
 source  $ROCK_DIR/packages/nginx.package.sh
 source  $ROCK_DIR/packages/lua.package.sh
 source  $ROCK_DIR/packages/php.package.sh
+source  $ROCK_DIR/packages/install.p7zip.sh
 
 
 echo -e "-----> Preparing Base APP"
@@ -44,6 +45,7 @@ cp -R $ROCK_DIR/support               $BUILD_DIR/
 cp -R $ROCK_DIR/conf                  $BUILD_DIR/
 # cp -R $ROCK_DIR/vendor/php            /app/vendor
 
+install_p7zip
 
 bundle_package # Install the binary bundle
 # php_package # build out custom php bundle
@@ -62,7 +64,7 @@ mv /app/vendor/* $BUILD_DIR/vendor/
 
 
 echo -e "-----> Preparing Composer"
-composer_package
+# composer_package
 
 
 
