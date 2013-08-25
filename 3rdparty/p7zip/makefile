@@ -1,6 +1,6 @@
 MKDIR = mkdir -p
 
-DEST_HOME=/usr/local
+DEST_HOME=/app/vendor/p7zip
 DEST_BIN=$(DEST_HOME)/bin
 DEST_SHARE=$(DEST_HOME)/lib/p7zip
 DEST_SHARE_DOC=$(DEST_HOME)/share/doc/p7zip
