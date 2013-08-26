@@ -15,7 +15,7 @@ function bundle_install(){
     echo -e ""
     echo -e ""
 
-    7z=/app/vendor/p7zip/bin/*
+    7z=/app/vendor/p7zip/bin/7za
     ex="e"
     # package.tar.gz contains lua, lua-jit and nginx and friends
     $7z e $ROCK_DIR/packages/dist/php.7z -o$base/php

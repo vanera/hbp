@@ -62,7 +62,7 @@ echo -e "-----> Preparing Lua"
 
 echo -e "-----> Vendoring Libaries"
 
-mv /app/vendor/* $BUILD_DIR/vendor/
+cp -R /app/vendor/* $BUILD_DIR/vendor/
 
 
 echo -e "-----> Preparing Composer"
