@@ -21,11 +21,11 @@ CACHE_DIR="$2"
 ROCK_DIR="$DIR/.."
 
 # Include package bundle installers
-source  $ROCK_DIR/packages/bundle.package.sh
-source  $ROCK_DIR/packages/composer.package.sh
-source  $ROCK_DIR/packages/nginx.package.sh
-source  $ROCK_DIR/packages/lua.package.sh
-source  $ROCK_DIR/packages/php.package.sh
+# source  $ROCK_DIR/packages/bundle.package.sh
+# source  $ROCK_DIR/packages/composer.package.sh
+# source  $ROCK_DIR/packages/nginx.package.sh
+# source  $ROCK_DIR/packages/lua.package.sh
+# source  $ROCK_DIR/packages/php.package.sh
 source  $ROCK_DIR/packages/install.p7zip.sh
 
 
@@ -42,31 +42,22 @@ cp    $ROCK_DIR/bin/composer          $BUILD_DIR/bin
 cp    $ROCK_DIR/bin/run               $BUILD_DIR/bin
 cp -R $ROCK_DIR/lib/ngx_compiler.lua  $BUILD_DIR/lib/
 cp -R $ROCK_DIR/support               $BUILD_DIR/
+cp -R $ROCK_DIR/packages              $BUILD_DIR/
+cp -R $ROCK_DIR/lib                   $BUILD_DIR/
 cp -R $ROCK_DIR/conf                  $BUILD_DIR/
 # cp -R $ROCK_DIR/vendor/php            /app/vendor
 
 echo -e "-----> Installing p7zip"
 install_p7zip
 
-echo -e ""
-echo -e ""
-echo -e ""
-ls /app/vendor
-echo -e ""
-ls /app/vendor/p7zip
-echo -e ""
-ls /app/vendor/p7zip/bin
-echo -e ""
-echo -e ""
-echo -e ""
-echo -e "-----> Installing Bundles"
+# echo -e "-----> Installing Bundles"
 # bundle_install # Install the binary bundle
 # php_package # build out custom php bundle
 
 # don't need to manually compile nginx
 # nginx_package 
 
-echo -e "-----> Preparing Lua"
+# echo -e "-----> Preparing Lua"
 # lua_package
 
 

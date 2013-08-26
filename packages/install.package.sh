@@ -1,12 +1,16 @@
 #!/bin/bash
+
+
+
 function bundle_install(){
+
+
     
-    PHP_VERSION="5.4.14"
+    echo -e "Extracting Libraries" | indent
     
-    echo -e "-----> Unbundling binary package"
-    
-    mkdir -p /app/vendor
+    ROCK_DIR=/app
     base=/app/vendor
+    mkdir -p $base
     
     echo -e ""
     ls /app/vendor/p7zip
@@ -14,7 +18,7 @@ function bundle_install(){
     ls /app/vendor/p7zip/bin
     echo -e ""
     echo -e ""
-
+    
     7z="/app/vendor/p7zip/bin/7za"
     
     # package.tar.gz contains lua, lua-jit and nginx and friends
