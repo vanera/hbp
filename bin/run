@@ -36,10 +36,10 @@ echo -e "-------------------------------------"
 echo -e "bin/run ---> Preparing Configuration "
 echo -e "-------------------------------------"
 
-APP_CONF=/app/conf/app.nginx
-APP_CONF_COMPILED=/app/conf/app.compiled.nginx
+export APP_CONF=/app/conf/app.nginx
+export APP_CONF_COMPILED=/app/conf/app.compiled.nginx
 
-LUA=/app/vendor/lua/lua
+export LUA=/app/vendor/lua/lua
 
 NGINX_ROOT=/app/vendor/nginx
 NGINX_CONF=/app/conf/nginx.conf
