@@ -63,7 +63,39 @@ mkdir -p logs
 echo "-------------------------------------"
 echo "bin/run ---> Starting NGINX"
 echo "-------------------------------------"
+
+read -d'' NginxCommand <<"EOF"
+#!/bin/bash
+export LD_LIBRARY_PATH=/app/vendor/luajit
+
+nginx_cmd=LD_LIBRARY_PATH=/app/vendor/luajit $nginx -p $NGINX_ROOT -c "$NGINX_CONF_COMPILED"
+
+$nginx_cmd $@
+
+EOF
+
+echo $NginxCommand > /app/bin/ngx
+
 cd "$NGINX_ROOT"
-LD_LIBRARY_PATH=/app/vendor/luajit $NGINX -p "$(pwd)" -c "$NGINX_CONF_COMPILED"
+LD_LIBRARY_PATH=/app/vendor/luajit $NGINX -p $NGINX_ROOT -c "$NGINX_CONF_COMPILED"
+
+
+echo "-------------------------------------"
+echo "bin/run ---> WebServer Running: $PORT"
+echo "-------------------------------------"
+
+echo ""
+echo ""
+
+
+echo "-------------------------------------"
+echo "bin/run ---> Tailing Logs to stdout  "
+echo "-------------------------------------"
+
+mkdir -p /app/app/logs
+
+touch /app/app/logs/nginx.error.log
+touch /app/app/logs/nginx.access.log
+
 
 
