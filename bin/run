@@ -59,6 +59,12 @@ cat "$APP_CONF" | $LUA /app/lib/ngx_compiler.lua > "$APP_CONF_COMPILED"
 mkdir -p logs
 
 
+mkdir -p /app/app/logs
+
+touch /app/app/logs/nginx.error.log
+touch /app/app/logs/nginx.access.log
+touch /app/app/logs/nginx.debug.log
+
 
 echo "-------------------------------------"
 echo "bin/run ---> Starting NGINX"
@@ -83,20 +89,12 @@ LD_LIBRARY_PATH=/app/vendor/luajit $NGINX -p $NGINX_ROOT -c "$NGINX_CONF_COMPILE
 echo "-------------------------------------"
 echo "bin/run ---> WebServer Running: $PORT"
 echo "-------------------------------------"
-
-echo -e ""
-echo -e ""
-
+echo ""
+echo ""
 
 echo "-------------------------------------"
 echo "bin/run ---> Tailing Logs to stdout  "
 echo "-------------------------------------"
-
-mkdir -p /app/app/logs
-
-touch /app/app/logs/nginx.error.log
-touch /app/app/logs/nginx.access.log
-touch /app/app/logs/nginx.debug.log
 
 tail -f /app/app/logs/nginx*
 
