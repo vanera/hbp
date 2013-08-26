@@ -8,7 +8,4 @@ function install_p7zip(){
     make -j4 -s
     echo -e "Installing p7zip" | indent
     make install -s
-
-    ls /app/vendor/p7zip
-
 }

@@ -39,8 +39,8 @@ echo -e "-------------------------------------"
 APP_CONF=/app/conf/app.nginx
 APP_CONF_COMPILED=/app/conf/app.compiled.nginx
 
-NGINX=$NGINX_ROOT/sbin/nginx
-LUA=/app/vendor/lua/bin/lua
+NGINX=$NGINX_ROOT/nginx
+LUA=/app/vendor/lua/lua
 
 NGINX_ROOT=/app/vendor/nginx
 NGINX_CONF=/app/conf/nginx.conf
@@ -62,6 +62,6 @@ mkdir -p logs
 echo -e "-------------------------------------"
 echo -e "bin/run ---> Starting NGINX"
 echo -e "-------------------------------------"
-$NGINX -p "$(pwd)" -c "$OUT_CONF"
+LD_LIBRARY_PATH=/app/vendor/luajit $NGINX -p "$(pwd)" -c "$OUT_CONF"
 
 
