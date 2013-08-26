@@ -9,6 +9,11 @@ indent() {
   sed -u 's/^/       /'
 }
 
+echo -e "-------------------------------------"
+echo -e "bin/run ---> Installing Software: "
+echo -e "-------------------------------------"
+
+install_packages
 
 
 APP_CONF=/app/conf/app.nginx

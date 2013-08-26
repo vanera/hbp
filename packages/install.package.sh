@@ -2,7 +2,7 @@
 
 
 
-function bundle_install(){
+function install_packages(){
 
 
     
@@ -18,7 +18,7 @@ function bundle_install(){
     ls /app/vendor/p7zip/bin
     echo -e ""
     echo -e ""
-    
+
     7z="/app/vendor/p7zip/bin/7za"
     
     # package.tar.gz contains lua, lua-jit and nginx and friends
