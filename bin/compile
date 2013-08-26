@@ -49,7 +49,7 @@ echo -e "-----> Installing p7zip"
 install_p7zip
 
 echo -e "-----> Installing Bundles"
-bundle_install # Install the binary bundle
+# bundle_install # Install the binary bundle
 # php_package # build out custom php bundle
 
 # don't need to manually compile nginx
