@@ -48,8 +48,19 @@ cp -R $ROCK_DIR/conf                  $BUILD_DIR/
 echo -e "-----> Installing p7zip"
 install_p7zip
 
+echo -e ""
+echo -e ""
+echo -e ""
+ls /app/vendor
+echo -e ""
+ls /app/vendor/p7zip
+echo -e ""
+ls /app/vendor/p7zip/bin
+echo -e ""
+echo -e ""
+echo -e ""
 echo -e "-----> Installing Bundles"
-bundle_install # Install the binary bundle
+# bundle_install # Install the binary bundle
 # php_package # build out custom php bundle
 
 # don't need to manually compile nginx
