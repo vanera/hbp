@@ -3,7 +3,8 @@
 export POSTGRESQL_URL="postgres://kidxlcmjelupro:BIppLpyT2_5E2FsaDpbxv-X-Kv@ec2-54-221-236-4.compute-1.amazonaws.com:5432/d3tejf3n4ju9lc"
 export LD_LIBRARY_PATH="/app/app/lib/"
 
-source /app/packages/install.package.sh
+export PATH=$PATH:/app/vendor/p7zip/bin:/app/vendor/nginx/sbin
+
 
 indent() {
   sed -u 's/^/       /'
@@ -13,8 +14,28 @@ echo -e "-------------------------------------"
 echo -e "bin/run ---> Installing Software: "
 echo -e "-------------------------------------"
 
-install_packages
+echo -e "Extracting Libraries" | indent
 
+ROCK_DIR=/app
+base=/app/vendor
+mkdir -p $base
+
+7z="/app/vendor/p7zip/bin/7za"
+
+# package.tar.gz contains lua, lua-jit and nginx and friends
+$7z e $ROCK_DIR/packages/dist/php.7z -o$base/php
+$7z e $ROCK_DIR/packages/dist/lua.7z -o$base/lua
+$7z e $ROCK_DIR/packages/dist/luajit.7z -o$base/luajit
+$7z e $ROCK_DIR/packages/dist/lualib.7z -o$base/lualib
+$7z e $ROCK_DIR/packages/dist/nginx.7z -o$base/nginx
+
+echo -e "Finished installing the binary bundle" | indent
+
+
+
+echo -e "-------------------------------------"
+echo -e "bin/run ---> Preparing Configuration "
+echo -e "-------------------------------------"
 
 APP_CONF=/app/conf/app.nginx
 APP_CONF_COMPILED=/app/conf/app.compiled.nginx
@@ -27,16 +48,17 @@ NGINX_CONF=/app/conf/nginx.conf
 NGINX_CONF_COMPILED=/app/conf/nginx.compiled.conf
 
 
+echo -e "-------------------------------------"
+echo -e "bin/run ---> Compiling NGINX Config  "
+echo -e "-------------------------------------"
 
 cd "$NGINX_ROOT"
-
-echo -e "-------------------------------------"
-echo -e "bin/run ---> Compiling NGINX Config: "
-echo -e "-------------------------------------"
 
 cat "$NGINX_CONF" | $LUA /app/lib/ngx_compiler.lua > "$NGINX_CONF_COMPILED"
 cat "$APP_CONF" | $LUA /app/lib/ngx_compiler.lua > "$APP_CONF_COMPILED"
 mkdir -p logs
+
+
 
 echo -e "-------------------------------------"
 echo -e "bin/run ---> Starting NGINX"
