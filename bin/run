@@ -96,6 +96,10 @@ mkdir -p /app/app/logs
 
 touch /app/app/logs/nginx.error.log
 touch /app/app/logs/nginx.access.log
+touch /app/app/logs/nginx.debug.log
+
+tail -f /app/app/logs/nginx*
+
 
 
 
