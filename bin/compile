@@ -69,18 +69,9 @@ echo -e "-----> Vendoring Libaries"
 cp -R /app/vendor/* $BUILD_DIR/vendor/
 
 
-echo -e "-----> Preparing Composer"
+# echo -e "-----> Preparing Composer"
 # composer_package
 
-
-
-
-echo -e "-----> /app Contents"
-echo -e ""
-ls -l ${BUILD_DIR}/
-
-echo -e "<-----"
-echo -e ""
 
 
 cd "$BUILD_DIR"
