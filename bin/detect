@@ -1,1 +1,1 @@
-echo "App (Detected)" && exit 0
+echo "Luafony" && exit 0
