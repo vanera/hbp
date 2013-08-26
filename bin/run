@@ -3,18 +3,18 @@
 export POSTGRESQL_URL="postgres://kidxlcmjelupro:BIppLpyT2_5E2FsaDpbxv-X-Kv@ec2-54-221-236-4.compute-1.amazonaws.com:5432/d3tejf3n4ju9lc"
 export LD_LIBRARY_PATH="/app/app/lib/"
 
-export PATH=$PATH:/app/vendor/p7zip/bin:/app/vendor/nginx/sbin
+export PATH=$PATH:/app/vendor/p7zip/bin:/app/vendor/nginx/sbin:/app/vendor/lua
 
 
 indent() {
   sed -u 's/^/       /'
 }
 
-echo -e "-------------------------------------"
-echo -e "bin/run ---> Installing Software: "
-echo -e "-------------------------------------"
+echo "-------------------------------------"
+echo "bin/run ---> Installing Software: "
+echo "-------------------------------------"
 
-echo -e "Extracting Libraries" | indent
+echo "Extracting Libraries" | indent
 
 ROCK_DIR=/app
 base=/app/vendor
@@ -28,13 +28,13 @@ mkdir -p $base
 7za e $ROCK_DIR/packages/dist/lualib.7z -o$base/lualib -y > /dev/null
 7za e $ROCK_DIR/packages/dist/nginx.7z -o$base/nginx -y > /dev/null
 
-echo -e "Finished installing the binary bundle" | indent
+echo "Finished installing the binary bundle" | indent
 
 
 
-echo -e "-------------------------------------"
-echo -e "bin/run ---> Preparing Configuration "
-echo -e "-------------------------------------"
+echo "-------------------------------------"
+echo "bin/run ---> Preparing Configuration "
+echo "-------------------------------------"
 
 export APP_CONF=/app/conf/app.nginx
 export APP_CONF_COMPILED=/app/conf/app.compiled.nginx
@@ -42,16 +42,17 @@ export APP_CONF_COMPILED=/app/conf/app.compiled.nginx
 export LUA=/app/vendor/lua/lua
 
 NGINX_ROOT=/app/vendor/nginx
+
 NGINX_CONF=/app/conf/nginx.conf
 NGINX_CONF_COMPILED=/app/conf/nginx.compiled.conf
+
 NGINX=$NGINX_ROOT/nginx
 
 
-echo -e "-------------------------------------"
-echo -e "bin/run ---> Compiling NGINX Config  "
-echo -e "-------------------------------------"
+echo "-------------------------------------"
+echo "bin/run ---> Compiling NGINX Config  "
+echo "-------------------------------------"
 
-cd "$NGINX_ROOT"
 
 cat "$NGINX_CONF" | $LUA /app/lib/ngx_compiler.lua > "$NGINX_CONF_COMPILED"
 cat "$APP_CONF" | $LUA /app/lib/ngx_compiler.lua > "$APP_CONF_COMPILED"
@@ -59,9 +60,9 @@ mkdir -p logs
 
 
 
-echo -e "-------------------------------------"
-echo -e "bin/run ---> Starting NGINX"
-echo -e "-------------------------------------"
+echo "-------------------------------------"
+echo "bin/run ---> Starting NGINX"
+echo "-------------------------------------"
 cd "$NGINX_ROOT"
 LD_LIBRARY_PATH=/app/vendor/luajit $NGINX -p "$(pwd)" -c "$NGINX_CONF_COMPILED"
 
