@@ -40,11 +40,11 @@ for file in `ls $APP_DIR/freezer/bundles`; do
     cd $APP_DIR;
 
     echo "---- extracting: $file ($name)"
-    7za e $APP_DIR/freezer/bundles/$file -o$APP_DIR/vendor/$name -y > /dev/null
-    
-    cd $APP_DIR/vendor/$name
-    tar -xz $name.tar.gz
-    
+    7za e $APP_DIR/freezer/bundles/$file -o$APP_DIR/vendor -y > /dev/null
+    echo "---- unwrapping tar.gz"
+    cd $APP_DIR/vendor
+    tar -xf $name.tar.gz
+    rm $name.tar.gz
 done
 
 
