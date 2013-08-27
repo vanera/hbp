@@ -121,7 +121,7 @@ echo "-------------------------------------"
 echo "bin/run ---> Tailing Logs to stdout  "
 echo "-------------------------------------"
 
-tail /app/app/logs/nginx*
+tail -f /app/app/logs/nginx*
 
 
 
