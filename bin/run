@@ -42,6 +42,12 @@ done
 
 echo "Finished installing software packages" | indent
 
+echo "-------------------------------------"
+echo "bin/run ---> Injecting External Config "
+echo "-------------------------------------"
+
+mkdir -p $APP_DIR/vendor/php/etc
+cp -R $APP_DIR/conf/php/php.ini $APP_DIR/vendor/php/etc/
 
 
 echo "-------------------------------------"
@@ -82,7 +88,7 @@ echo "-------------------------------------"
 echo "bin/run ---> Starting PHP-FPM"
 echo "-------------------------------------"
 
-/app/vendor/php/php-fpm -y /app/conf/php-fpm.conf
+/app/vendor/php/php-fpm -y /app/conf/php/php-fpm.conf
 
 
 echo "-------------------------------------"
@@ -115,7 +121,7 @@ echo "-------------------------------------"
 echo "bin/run ---> Tailing Logs to stdout  "
 echo "-------------------------------------"
 
-tail -f /app/app/logs/nginx*
+tail /app/app/logs/nginx*
 
 
 
