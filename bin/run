@@ -29,16 +29,16 @@ mkdir -p $base
 7za e $APP_DIR/packages/dist/nginx.7z -o$base/nginx -y > /dev/null
 
 
-pushd $APP_DIR
-    echo "-- Extracting Freezer Bundles"
+cd $APP_DIR;
+echo "-- Extracting Freezer Bundles"
 
-    for file in `ls $APP_DIR/freezer/bundles`; do
-        file=${file%*/}
-        name=${file%.7z}
-        echo "---- extracting: $file ($name)"
-        7za e $APP_DIR/freezer/bundles/$file -o $APP_DIR/vendor/$name -y > /dev/null
-    done
-popd
+for file in `ls $APP_DIR/freezer/bundles`; do
+    file=${file%*/}
+    name=${file%.7z}
+    echo "---- extracting: $file ($name)"
+    7za e $APP_DIR/freezer/bundles/$file -o $APP_DIR/vendor/$name -y > /dev/null
+done
+
 
 echo "-- Finished installing software packages" | indent
 
