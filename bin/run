@@ -31,8 +31,9 @@ mkdir -p $base
 
 pushd $APP_DIR
     echo "-- Extracting Freezer Bundles"
+
     for file in `ls $APP_DIR/freezer/bundles`; do
-        file=${dir%*/}
+        file=${file%*/}
         name=${file%.7z}
         echo "---- extracting: $file ($name)"
         7za e $APP_DIR/freezer/bundles/$file -o $APP_DIR/vendor/$name -y > /dev/null
