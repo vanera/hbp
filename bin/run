@@ -7,14 +7,14 @@ export PATH=$PATH:/app/vendor/p7zip/bin:/app/vendor/nginx/sbin:/app/vendor/lua
 
 
 indent() {
-  sed -u 's/^/       /'
+  sed -u 's/^/ --      /'
 }
 
 echo "-------------------------------------"
 echo "bin/run ---> Installing Software: "
 echo "-------------------------------------"
 
-echo "-- Extracting Libraries" | indent
+echo "Extracting Libraries" | indent
 
 APP_DIR=/app
 base=/app/vendor
@@ -40,7 +40,7 @@ for file in `ls $APP_DIR/freezer/bundles`; do
 done
 
 
-echo "-- Finished installing software packages" | indent
+echo "Finished installing software packages" | indent
 
 
 
