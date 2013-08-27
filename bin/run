@@ -43,6 +43,13 @@ done
 echo "Finished installing software packages" | indent
 
 echo "-------------------------------------"
+echo "bin/run ---> Generating Boot Cache "
+echo "-------------------------------------"
+
+cd $APP_DIR;
+vendor/php/php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
+
+echo "-------------------------------------"
 echo "bin/run ---> Injecting External Config "
 echo "-------------------------------------"
 
