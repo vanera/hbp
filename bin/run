@@ -37,8 +37,14 @@ echo "-------------------------------------"
 for file in `ls $APP_DIR/freezer/bundles`; do
     file=${file%*/}
     name=${file%.7z}
+    cd $APP_DIR;
+
     echo "---- extracting: $file ($name)"
-    7za e $APP_DIR/freezer/bundles/$file -o$APP_DIR/vendor/$name -y
+    7za e $APP_DIR/freezer/bundles/$file -o$APP_DIR/vendor/$name -y > /dev/null
+    
+    cd $APP_DIR/vendor/$name
+    tar -xz $name.tar.gz
+    
 done
 
 
