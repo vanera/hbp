@@ -76,21 +76,28 @@ mkdir -p /app/app/logs
 touch /app/app/logs/nginx.error.log
 touch /app/app/logs/nginx.access.log
 touch /app/app/logs/nginx.debug.log
+touch /app/app/logs/fpm.error.log
+
+echo "-------------------------------------"
+echo "bin/run ---> Starting PHP-FPM"
+echo "-------------------------------------"
+
+/app/vendor/php/php-fpm -y /app/conf/php-fpm.conf
 
 
 echo "-------------------------------------"
 echo "bin/run ---> Starting NGINX"
 echo "-------------------------------------"
 
-read -d'' NginxCommand <<"EOF"
-#!/bin/bash
-export LD_LIBRARY_PATH=/app/vendor/luajit
+# read -d'' NginxCommand <<"EOF"
+# #!/bin/bash
+# export LD_LIBRARY_PATH=/app/vendor/luajit
 
-nginx_cmd=LD_LIBRARY_PATH=/app/vendor/luajit $nginx -p $NGINX_ROOT -c "$NGINX_CONF_COMPILED"
+# nginx_cmd=LD_LIBRARY_PATH=/app/vendor/luajit $nginx -p $NGINX_ROOT -c "$NGINX_CONF_COMPILED"
 
-$nginx_cmd $@
+# $nginx_cmd $@
 
-EOF
+# EOF
 
 echo $NginxCommand > /app/bin/ngx
 
